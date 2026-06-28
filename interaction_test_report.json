@@ -1,0 +1,163 @@
+{
+  "pageErrors": [],
+  "consoleErrors": [],
+  "clickable": [
+    {
+      "type": "nav-anchor",
+      "target": "#capability",
+      "result": "ok"
+    },
+    {
+      "type": "nav-anchor",
+      "target": "#projects",
+      "result": "ok"
+    },
+    {
+      "type": "nav-anchor",
+      "target": "#system",
+      "result": "ok"
+    },
+    {
+      "type": "nav-anchor",
+      "target": "#gallery",
+      "result": "ok"
+    },
+    {
+      "type": "nav-anchor",
+      "target": "#closing",
+      "result": "ok"
+    }
+  ],
+  "scrollable": [],
+  "interactive": [
+    {
+      "type": "gallery-item",
+      "index": 0,
+      "opened": true,
+      "slides": 60,
+      "imgLoaded": true,
+      "switch": "1 / 60 -> 2 / 60",
+      "closed": true
+    },
+    {
+      "type": "gallery-item",
+      "index": 1,
+      "opened": true,
+      "slides": 55,
+      "imgLoaded": true,
+      "switch": "1 / 55 -> 2 / 55",
+      "closed": true
+    },
+    {
+      "type": "gallery-item",
+      "index": 2,
+      "opened": true,
+      "slides": 40,
+      "imgLoaded": true,
+      "switch": "1 / 40 -> 2 / 40",
+      "closed": true
+    },
+    {
+      "type": "gallery-item",
+      "index": 3,
+      "opened": true,
+      "slides": 33,
+      "imgLoaded": true,
+      "switch": "1 / 33 -> 2 / 33",
+      "closed": true
+    },
+    {
+      "type": "hamburger",
+      "open": true,
+      "closeByScrim": true
+    }
+  ],
+  "summary": {
+    "inventory": {
+      "clickable": 26,
+      "pointer": 45,
+      "scrollable": 0,
+      "form": 0
+    },
+    "clickableList": [
+      "a \"能力\"",
+      "a \"项目\"",
+      "a \"系统\"",
+      "a \"图册\"",
+      "a \"关于\"",
+      "a.nav-drawer-link \"能力\"",
+      "a.nav-drawer-link \"项目\"",
+      "a.nav-drawer-link \"系统\"",
+      "a.nav-drawer-link \"图册\"",
+      "a.nav-drawer-link \"关于\"",
+      "a.sys-cta \"下载试用 →\"",
+      "a.sys-cta \"小程序组件库 →\"",
+      "a.sys-cta.sys-cta-ghost \"机构端组件库 →\"",
+      "a.km-article-card \"如何用 Figma Make + 组件库 实现 \"",
+      "a.km-article-card \"当我只有一张PNG界面，如何做成可落地的方案\"",
+      "a.km-article-card \"让 AI 自动检测并替换 Figma 变量，提升\"",
+      "div.gallery-item \"腾讯公益 2024–至今 小程序·99公益日和年\"",
+      "div.gallery-item \"公益志愿者平台 2021–2024 志愿者小程序\"",
+      "div.gallery-item \"腾讯视频 2019–2021 创造营2020·创\"",
+      "div.gallery-item \"美团 2018–2019 到店餐饮秒杀频道·小吃\"",
+      "a.contact-item \"380169482@qq.com\"",
+      "span.contact-item.contact-wechat \"微信 13609612375 已复制 ✓\"",
+      "a.contact-item \"下载简历\"",
+      "button#gv-close.gv-close \"退出\"",
+      "button#gv-prev.gv-nav.gv-prev",
+      "button#gv-next.gv-nav.gv-next"
+    ],
+    "pointerList": [
+      "div.km-article-thumb",
+      "img",
+      "div.km-article-meta \"如何用 Figma Make + 组件库 实现 \"",
+      "div.km-article-thumb",
+      "img",
+      "div.km-article-meta \"当我只有一张PNG界面，如何做成可落地的方案\"",
+      "div.km-article-thumb",
+      "img",
+      "div.km-article-meta \"让 AI 自动检测并替换 Figma 变量，提升\"",
+      "div.gallery-caption \"腾讯公益 2024–至今 小程序·99公益日和年\"",
+      "img.gallery-logo",
+      "div.gallery-caption-text \"腾讯公益 2024–至今 小程序·99公益日和年\"",
+      "div.gallery-caption-title \"腾讯公益 2024–至今\"",
+      "div.gallery-caption-sub \"小程序·99公益日和年底活动小程序·捐赠全链路数\"",
+      "div.gallery-caption \"公益志愿者平台 2021–2024 志愿者小程序\"",
+      "img.gallery-logo",
+      "div.gallery-caption-text \"公益志愿者平台 2021–2024 志愿者小程序\"",
+      "div.gallery-caption-title \"公益志愿者平台 2021–2024\"",
+      "div.gallery-caption-sub \"志愿者小程序公益组织WEB端深圳志愿者小程序\"",
+      "div.gallery-caption \"腾讯视频 2019–2021 创造营2020·创\"",
+      "img.gallery-logo",
+      "div.gallery-caption-text \"腾讯视频 2019–2021 创造营2020·创\"",
+      "div.gallery-caption-title \"腾讯视频 2019–2021\"",
+      "div.gallery-caption-sub \"创造营2020·创造营2021等IP节目互动观后\"",
+      "div.gallery-caption \"美团 2018–2019 到店餐饮秒杀频道·小吃\"",
+      "img.gallery-logo",
+      "div.gallery-caption-text \"美团 2018–2019 到店餐饮秒杀频道·小吃\"",
+      "div.gallery-caption-title \"美团 2018–2019\"",
+      "div.gallery-caption-sub \"到店餐饮秒杀频道·小吃快餐·美食地图到店餐饮商家\"",
+      "svg",
+      "rect",
+      "path",
+      "svg",
+      "path",
+      "path",
+      "path",
+      "path",
+      "svg",
+      "path",
+      "polyline",
+      "span.gv-close-icon",
+      "svg",
+      "polyline",
+      "svg",
+      "polyline"
+    ],
+    "scrollableList": [],
+    "errors": {
+      "pageErrors": 0,
+      "consoleErrors": 0
+    }
+  }
+}
