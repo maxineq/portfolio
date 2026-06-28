@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>magasinn.xyz 风格迁移分析 · portfolio_v2.html</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#FAFAF8;          /* 保留 portfolio 暖米白 */
+    --ink:#111111;
+    --muted:#6B7280;
+    --line:#E5E5E5;
+    --paper:#F2F0EA;       /* 比 bg 略深的次级容器底 */
+    --accent:#FFD60A;      /* 保留 portfolio 暖黄 */
+    --accent-ink:#C99800;  /* 黄的深色锚点，用在小字 */
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter','PingFang SC',-apple-system,sans-serif;
+    line-height:1.7;
+    font-size:15px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:80px 40px 120px}
+  header.cover{
+    display:grid;grid-template-columns:1fr auto;gap:48px;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:48px;margin-bottom:80px;
+  }
+  .eyebrow{
+    font-family:'Outfit',sans-serif;
+    font-size:11px;font-weight:700;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  h1.cover-ttl{
+    font-family:'Outfit',sans-serif;
+    font-size:clamp(48px,7vw,96px);
+    font-weight:900;line-height:.95;letter-spacing:-.03em;
+    margin-top:24px;text-transform:uppercase;
+  }
+  h1.cover-ttl em{font-style:normal;color:var(--accent)}
+  .cover-meta{font-size:12px;color:var(--muted);align-self:end;text-align:right;line-height:1.6}
+  .cover-meta b{color:var(--ink);font-weight:700}
+
+  /* Section block */
+  section{margin:88px 0;display:grid;grid-template-columns:140px 1fr;gap:48px;align-items:start}
+  section .marker{
+    position:sticky;top:24px;
+    font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  }
+  section .marker .num{display:block;font-size:13px;color:var(--ink);margin-bottom:6px}
+  section h2{
+    font-family:'Outfit',sans-serif;
+    font-size:clamp(34px,4.5vw,56px);
+    font-weight:900;line-height:1.02;letter-spacing:-.02em;
+    text-transform:uppercase;margin-bottom:32px;
+  }
+  section h2 small{
+    display:block;font-family:'Inter',sans-serif;
+    font-size:14px;font-weight:500;color:var(--muted);
+    letter-spacing:0;text-transform:none;margin-top:8px;line-height:1.6;
+  }
+  section p{margin:14px 0;max-width:62ch}
+  section p strong{font-weight:700}
+
+  /* DNA grid */
+  .dna{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+  .dna .cell{background:var(--bg);padding:24px 22px}
+  .dna .cell .k{font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .dna .cell .v{font-size:14px;line-height:1.6}
+  .dna .cell .v code{font-family:'SF Mono',Menlo,monospace;font-size:12px;background:var(--paper);padding:2px 6px;border-radius:3px}
+
+  /* Patch block */
+  .patch{margin-top:28px;border:1px solid var(--ink);background:var(--paper)}
+  .patch-hd{
+    background:var(--ink);color:var(--bg);
+    padding:10px 18px;font-family:'Outfit',sans-serif;font-size:11px;
+    font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .patch-hd .tag{
+    background:var(--accent);color:#fff;
+    font-size:10px;padding:3px 8px;border-radius:2px;
+  }
+  .patch pre{
+    margin:0;padding:20px 22px;overflow-x:auto;
+    font-family:'SF Mono',Menlo,Consolas,monospace;
+    font-size:12.5px;line-height:1.65;color:#222;
+  }
+  .patch pre .c{color:#888;font-style:italic}
+  .patch pre .add{background:rgba(40,140,80,.10);display:block;padding:0 6px;margin:0 -6px}
+  .patch pre .del{background:rgba(200,68,44,.10);display:block;padding:0 6px;margin:0 -6px;text-decoration:line-through;text-decoration-color:rgba(0,0,0,.3)}
+
+  /* Comparison table */
+  .compare{display:grid;grid-template-columns:1fr 32px 1fr;gap:18px;margin:24px 0;align-items:start}
+  .compare .col{border:1px solid var(--line);background:var(--paper);padding:18px 20px}
+  .compare .col .tag{font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .compare .col.now .tag::before{content:"现状 · ";color:var(--accent)}
+  .compare .col.next .tag::before{content:"改后 · ";color:#2a7a4a}
+  .compare .col .body{font-size:13.5px;line-height:1.65}
+  .compare .arrow{padding-top:36px;text-align:center;color:var(--muted);font-size:20px}
+
+  /* Marquee preview */
+  .marquee-demo{
+    margin-top:24px;
+    background:var(--ink);color:var(--bg);
+    padding:22px 0;overflow:hidden;white-space:nowrap;
+    border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  }
+  .marquee-demo .track{
+    display:inline-block;
+    font-family:'Outfit',sans-serif;font-size:64px;font-weight:900;
+    letter-spacing:-.02em;text-transform:uppercase;
+    animation:slide 22s linear infinite;
+  }
+  .marquee-demo .track span{margin:0 32px;color:var(--accent);font-size:24px;vertical-align:middle}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* hero numbered carousel demo */
+  .num-demo{
+    display:flex;gap:6px;align-items:center;
+    font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+    letter-spacing:.15em;color:var(--muted);margin-top:18px;
+  }
+  .num-demo .cur{color:var(--ink);font-size:14px}
+  .num-demo .bar{display:inline-block;width:42px;height:1px;background:var(--ink);margin:0 8px}
+
+  /* Footer summary */
+  .summary{
+    margin-top:120px;border-top:1px solid var(--ink);padding-top:48px;
+    display:grid;grid-template-columns:140px 1fr;gap:48px;
+  }
+  .summary ol{margin-left:18px}
+  .summary ol li{margin:10px 0;font-size:14px;line-height:1.7}
+  .summary ol li b{font-weight:700}
+
+  /* TOC pill nav */
+  .toc{
+    position:sticky;top:0;background:var(--bg);
+    padding:18px 0;border-bottom:1px solid var(--line);
+    margin:-80px -40px 0;padding-left:40px;padding-right:40px;
+    z-index:10;display:flex;gap:18px;flex-wrap:wrap;
+    font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;
+  }
+  .toc a{color:var(--muted);text-decoration:none;transition:color .2s}
+  .toc a:hover{color:var(--ink)}
+
+  @media (max-width:780px){
+    .wrap{padding:48px 22px 80px}
+    section{grid-template-columns:1fr;gap:18px}
+    section .marker{position:static}
+    .compare{grid-template-columns:1fr;gap:12px}
+    .compare .arrow{display:none}
+    .dna{grid-template-columns:1fr}
+    header.cover{grid-template-columns:1fr;gap:24px}
+    .cover-meta{text-align:left}
+    .summary{grid-template-columns:1fr;gap:18px}
+    .toc{margin:-48px -22px 0;padding-left:22px;padding-right:22px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="toc">
+    <a href="#dna">A · 设计 DNA</a>
+    <a href="#interaction">B · 交互方式</a>
+    <a href="#motion">C · 动效</a>
+    <a href="#mapping">D · 映射到 portfolio_v2</a>
+    <a href="#patches">E · 具体改造方案</a>
+    <a href="#priority">F · 改造优先级</a>
+  </div>
+
+  <header class="cover">
+    <div>
+      <div class="eyebrow">Style Transfer Brief · magasinn.xyz/service → portfolio_v2.html</div>
+      <h1 class="cover-ttl">借 magasinn 的<br><em>编辑式骨架</em>，<br>保留 portfolio 的<br>暖色温度</h1>
+    </div>
+    <div class="cover-meta">
+      参考站点 <b>magasinn.xyz/service</b><br>
+      目标文件 <b>portfolio_v2.html</b><br>
+      产出 设计 DNA · 交互动效 · 改造补丁<br>
+      <span style="color:var(--muted)">2026.06.10</span>
+    </div>
+  </header>
+
+  <!-- ════════════════════ A · DESIGN DNA ════════════════════ -->
+  <section id="dna">
+    <div class="marker"><span class="num">A</span>Design DNA</div>
+    <div>
+      <h2>magasinn 在做什么<small>把网站当成一本杂志：大留白、超大日西混排标题、内容块之间用横滚装饰带过渡，整体气质像 "印刷品 + 极少动态点缀"。<br><b>注意：本次迁移只借它的结构和动效，颜色仍沿用 portfolio 的暖米白 + 黄。</b></small></h2>
+
+      <div class="dna">
+        <div class="cell"><div class="k">背景色（不换）</div><div class="v">继续用 portfolio 的暖米白 <code>#FAFAF8</code>。比 magasinn 的灰更温暖、更贴"公益"题材气质。</div></div>
+        <div class="cell"><div class="k">字体系（借）</div><div class="v">日西混排无衬线（YakuHanJP + dnp-shuei-gothic）。三个层级：<br>· 节标签 18px regular，纯英文，作为 eyebrow<br>· 主标题 48–80px <b>700</b>，字距 <code>-0.02em</code><br>· 正文 14–16px regular，行高 1.8</div></div>
+        <div class="cell"><div class="k">编号语言（借）</div><div class="v">业务列表用半角括号 <code>(01) (02) (03)</code>；流程步骤同样 <code>(01)–(06)</code>。括号本身也是排版元素，绝不省略。</div></div>
+        <div class="cell"><div class="k">分栏（借）</div><div class="v">不对称 grid。左列是节标签 + 节标题（占 1/3），右列是正文 / 卡组（占 2/3）。整页像翻一本左标右文的杂志。</div></div>
+        <div class="cell"><div class="k">卡片（借）</div><div class="v"><b>没有"卡片"。</b>项目就是 一张图 + 标题 + 一句话，直接坐在底色上，靠间距而非边框来分隔。圆角极小或没有。</div></div>
+        <div class="cell"><div class="k">强调色（不换）</div><div class="v">继续用 portfolio 的 <code>#FFD60A</code> 黄。用法上更克制——只点缀在 hero 高亮词、verdict 引用条左侧线，不大面积上墙。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ B · INTERACTION ════════════════════ -->
+  <section id="interaction">
+    <div class="marker"><span class="num">B</span>Interaction</div>
+    <div>
+      <h2>交互方式<small>magasinn 的交互全部围绕"滚动 = 翻页"展开，几乎没有点击展开/折叠，所有内容都铺开来读。</small></h2>
+
+      <p><b>① Hero 自动横向轮播 + 索引指示器。</b>顶部不是一张静态大图，而是 7 张图横向缓慢平移。右上角的 <code>01 ─ 03 ─ scroll</code> 一直在那儿告诉用户"现在第几张 / 总共几张 / 请向下滚"。</p>
+
+      <div class="num-demo"><span class="cur">01</span><span class="bar"></span><span>03</span><span style="margin-left:14px;letter-spacing:.25em">SCROLL ↓</span></div>
+
+      <p><b>② 无限横滚 marquee 文字带。</b>section 之间用大字 <code>PROJECT EDIT PROJECT EDIT…</code> 或 <code>NEXT NEXT NEXT…</code> 做过渡。文字一直在缓慢向左移动，是页面唯一的"环境动效"。</p>
+
+      <div class="marquee-demo"><div class="track">NEXT <span>✕</span> NEXT <span>✕</span> NEXT <span>✕</span> NEXT <span>✕</span> NEXT <span>✕</span> NEXT <span>✕</span> NEXT <span>✕</span> NEXT <span>✕</span> </div></div>
+
+      <p><b>③ Scroll-triggered reveal。</b>所有内容块进入视口时统一 fade + up（24px），不分方向、不分类型，但每个子元素 stagger 0.1s 进入，让一整块有"逐字读"的节奏感。</p>
+
+      <p><b>④ 没有手风琴。</b>这点和你当前 portfolio_v2 截然相反——magasinn 把所有项目细节都铺开，靠 <i>大量留白和巨大标题</i> 来切分章节，而不是靠 "+/×" 折叠。</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════ C · MOTION ════════════════════ -->
+  <section id="motion">
+    <div class="marker"><span class="num">C</span>Motion</div>
+    <div>
+      <h2>动效配方<small>仅 2 个核心动画 + 1 个统一缓动函数，整站克制但高级。</small></h2>
+
+      <div class="dna">
+        <div class="cell"><div class="k">缓动</div><div class="v"><code>cubic-bezier(0.16, 1, 0.3, 1)</code>（ease-out-expo 的弱化版）。所有 fade/translate 都用这条。开头快、尾巴长 ≈ "丝滑减速"。</div></div>
+        <div class="cell"><div class="k">时长</div><div class="v"><code>1.6s</code> 是统一的入场时长（比你现在的 0.6s 慢一倍多）。同一组元素用 <code>0.1s / 0.2s / 0.3s ...</code> 阶梯延迟。</div></div>
+        <div class="cell"><div class="k">Marquee</div><div class="v"><code>20–25s linear infinite</code>，<code>translateX(0 → -50%)</code>，文字串复制一份接在后面做无缝循环。</div></div>
+        <div class="cell"><div class="k">Hover</div><div class="v">图片 <code>scale(1.02)</code> + <code>0.6s ease-out-expo</code>；链接下划线从 0 → 100% 用同款 0.6s 缓动。<b>不用</b>阴影变化。</div></div>
+        <div class="cell"><div class="k">Hero 入场</div><div class="v">页面加载先有一个 <code>0.7s 0.5s anime-loader-fadein</code> 全局淡入，营造"翻杂志封面"的仪式感。</div></div>
+        <div class="cell"><div class="k">禁止项</div><div class="v">不用 bouncy spring；不用 3D transform；不用 hover 抬升 + 投影；不用 fancy parallax。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ D · MAPPING ════════════════════ -->
+  <section id="mapping">
+    <div class="marker"><span class="num">D</span>Mapping</div>
+    <div>
+      <h2>映射到 portfolio_v2<small>把你文件里每个模块逐一对照，看 magasinn 会怎么改。</small></h2>
+
+      <div class="compare">
+        <div class="col now"><div class="tag">HERO 区</div><div class="body">超大 <code>OUTFIT 900</code> 标题 + 黄色 <code>em</code> 高亮 + 三个 stat 数字平铺，很"硅谷 landing page"。</div></div>
+        <div class="arrow">→</div>
+        <div class="col next"><div class="tag">HERO 区</div><div class="body"><b>颜色完全保留</b>（米白 + 黄高亮）。只动结构：stats 改成带 <code>(01)(02)(03)</code> 编号前缀；右上角加一个 <code>01─03 SCROLL↓</code> 滚动提示。视觉重量从"亮色"转到"排版"。</div></div>
+      </div>
+
+      <div class="compare">
+        <div class="col now"><div class="tag">CAPABILITY 卡组</div><div class="body">5 张 <code>cap-card</code>，白底、圆角 <code>1rem</code>、hover 起阴影。是典型的 SaaS 卡片。</div></div>
+        <div class="arrow">→</div>
+        <div class="col next"><div class="tag">CAPABILITY 卡组</div><div class="body">去掉白底、圆角和阴影。每张卡变成：<b>(01) ICON · 标题 · 一句话 · 数字</b>，直接坐在原本的 <code>#FAFAF8</code> 米白底上，元素之间靠 <code>40px</code> 间距 + 顶部 1px 细线分隔。grid 改为不对称留白，做编辑感。</div></div>
+      </div>
+
+      <div class="compare">
+        <div class="col now"><div class="tag">PROJECTS 手风琴</div><div class="body">三条 <code>proj-row</code>，点 <code>+</code> 展开，里面塞 tension/verdict/revisions/flow-compare 一大坨。</div></div>
+        <div class="arrow">→</div>
+        <div class="col next"><div class="tag">PROJECTS 长卷</div><div class="body"><b>取消手风琴。</b>三个项目直接铺开成三段长 section。每段以 <code>(01)</code>(02)(03) 起头，左侧固定 sticky 显示项目编号 + 名称，右侧滚 story / 引用 / 流程对比。读起来像三篇短报道。</div></div>
+      </div>
+
+      <div class="compare">
+        <div class="col now"><div class="tag">章节切换</div><div class="body">section 之间用 <code>padding:7rem 0</code> 的留白切分，比较安静。</div></div>
+        <div class="arrow">→</div>
+        <div class="col next"><div class="tag">章节切换</div><div class="body">在 CAPABILITY → PROJECTS、PROJECTS → SYSTEM 之间各插一条 <b>marquee 文字带</b>，比如 <code>WORK · WORK · WORK</code> 和 <code>SYSTEM · SYSTEM · SYSTEM</code>，给长卷"翻页感"。</div></div>
+      </div>
+
+      <div class="compare">
+        <div class="col now"><div class="tag">CLOSING</div><div class="body">居底的引言段 + 身份签名，比较克制。</div></div>
+        <div class="arrow">→</div>
+        <div class="col next"><div class="tag">CLOSING</div><div class="body">改成 magasinn 的 <b>NEXT 带</b>：深 <code>#111111</code>（沿用 portfolio 原 <code>--text</code>）满宽条带 + 巨大米白字 "LET'S TALK · LET'S TALK · ..." 滚动 → 点击跳邮件/微信。底部 NEXT 带可以用 <code>#FFD60A</code> 黄做点缀分隔符 ✕，呼应 hero 高亮色。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ E · PATCHES ════════════════════ -->
+  <section id="patches">
+    <div class="marker"><span class="num">E</span>Patches</div>
+    <div>
+      <h2>具体改造方案<small>以下 6 个补丁可直接套到 <code>portfolio_v2.html</code>，按顺序合入即可。</small></h2>
+
+      <!-- Patch 1 -->
+      <div class="patch">
+        <div class="patch-hd"><span>Patch 01 · 在原 tokens 上追加，颜色不动</span><span class="tag">CSS</span></div>
+<pre><span class="c">/* 颜色完全保留 portfolio 原值，只追加结构/动效需要的新 token */</span>
+:root {
+  --bg:        #FAFAF8;   <span class="c">/* 保留 */</span>
+  --bg-white:  #FFFFFF;   <span class="c">/* 保留，但后续少用 */</span>
+  --text:      #111111;   <span class="c">/* 保留 */</span>
+  --muted:     #6B7280;   <span class="c">/* 保留 */</span>
+  --border:    #E5E5E5;   <span class="c">/* 保留 */</span>
+  --accent:    #FFD60A;   <span class="c">/* 保留暖黄 */</span>
+<span class="add">  --paper:     #F2F0EA;   /* 新增：比 --bg 略深的次级容器底 */
+  --ink:       #111111;   /* 新增别名，便于跟 magasinn 模板对齐 */
+  --line:      #E5E5E5;   /* 新增别名 = --border */
+  --radius-lg: 4px;       /* 改：杂志几乎不用大圆角 */
+  --radius-md: 2px;       /* 改：同上 */
+  --ease:      cubic-bezier(0.16, 1, 0.3, 1);  /* 新增：统一缓动 */
+  --dur:       1.6s;      /* 新增：统一时长 */</span>
+}</pre>
+      </div>
+
+      <!-- Patch 2 -->
+      <div class="patch">
+        <div class="patch-hd"><span>Patch 02 · Hero 加滚动指示器 + 编号 stats</span><span class="tag">HTML + CSS</span></div>
+<pre><span class="c">&lt;!-- 在 .hero-stats 上方插入 --&gt;</span>
+<span class="add">&lt;div class="hero-scroll-indicator"&gt;
+  &lt;span class="cur"&gt;01&lt;/span&gt;&lt;span class="bar"&gt;&lt;/span&gt;&lt;span&gt;03&lt;/span&gt;
+  &lt;span class="hint"&gt;SCROLL ↓&lt;/span&gt;
+&lt;/div&gt;</span>
+
+<span class="c">/* CSS 追加 */</span>
+.hero-scroll-indicator{
+  position:absolute; top:7rem; right:2rem;
+  display:flex; align-items:center; gap:8px;
+  font-family:'Outfit'; font-size:12px; font-weight:700;
+  letter-spacing:.18em; color:var(--muted);
+}
+.hero-scroll-indicator .cur{color:var(--ink); font-size:14px}
+.hero-scroll-indicator .bar{
+  display:inline-block; width:42px; height:1px;
+  background:var(--ink); margin:0 6px;
+}
+.hero-stat-num::before{
+  content:'(0' counter(stat) ') ';
+  counter-increment:stat;
+  font-family:'Outfit'; font-size:.7em;
+  color:var(--muted); margin-right:6px;
+}
+.hero-stats{counter-reset:stat}</pre>
+      </div>
+
+      <!-- Patch 3 -->
+      <div class="patch">
+        <div class="patch-hd"><span>Patch 03 · CAPABILITY 去卡片化</span><span class="tag">CSS</span></div>
+<pre>.cap-card{
+<span class="del">  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  transition: box-shadow .25s;</span>
+<span class="add">  background: transparent;
+  border: none;
+  border-top: 1px solid var(--line);  /* 顶线区隔 */
+  border-radius: 0;
+  padding: 2rem 0 2.5rem;
+  transition: opacity .4s var(--ease);</span>
+}
+.cap-card:hover{
+<span class="del">  box-shadow: 0 20px 40px -15px rgba(0,0,0,.08);</span>
+<span class="add">  /* 不用 hover，靠间距和编号自然分块 */</span>
+}
+.cap-card::before{
+  content:'(0' counter(cap) ')';
+  counter-increment:cap;
+  display:block;
+  font-family:'Outfit'; font-size:11px; font-weight:700;
+  letter-spacing:.18em; color:var(--muted);
+  margin-bottom:18px;
+}
+.cap-grid{counter-reset:cap}</pre>
+      </div>
+
+      <!-- Patch 4 -->
+      <div class="patch">
+        <div class="patch-hd"><span>Patch 04 · 加 marquee 过渡带</span><span class="tag">HTML + CSS</span></div>
+<pre><span class="c">&lt;!-- 在 #capability 和 #projects 之间插入 --&gt;</span>
+<span class="add">&lt;div class="marquee" aria-hidden="true"&gt;
+  &lt;div class="marquee-track"&gt;
+    &lt;span&gt;WORK&lt;/span&gt;&lt;b&gt;✕&lt;/b&gt;&lt;span&gt;WORK&lt;/span&gt;&lt;b&gt;✕&lt;/b&gt;
+    &lt;span&gt;WORK&lt;/span&gt;&lt;b&gt;✕&lt;/b&gt;&lt;span&gt;WORK&lt;/span&gt;&lt;b&gt;✕&lt;/b&gt;
+    &lt;span&gt;WORK&lt;/span&gt;&lt;b&gt;✕&lt;/b&gt;&lt;span&gt;WORK&lt;/span&gt;&lt;b&gt;✕&lt;/b&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</span>
+
+.marquee{
+  background:var(--ink); color:var(--bg);
+  padding:28px 0; overflow:hidden; white-space:nowrap;
+}
+.marquee-track{
+  display:inline-block;
+  font-family:'Outfit'; font-weight:900;
+  font-size:clamp(48px,8vw,96px);
+  letter-spacing:-.02em;
+  animation:marquee 22s linear infinite;
+}
+.marquee-track span{margin:0 32px}
+.marquee-track b{color:var(--accent); font-size:.4em; vertical-align:middle}
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}</pre>
+      </div>
+
+      <!-- Patch 5 -->
+      <div class="patch">
+        <div class="patch-hd"><span>Patch 05 · PROJECTS 取消手风琴，改长卷</span><span class="tag">HTML + JS</span></div>
+<pre><span class="c">/* 删除原 toggleProject 逻辑，让 .proj-body 默认 display:block */</span>
+.proj-row{
+<span class="del">  background:#fff; border:1px solid var(--border);
+  border-radius:var(--radius-md); margin-bottom:1rem;</span>
+<span class="add">  background:transparent; border:none; border-radius:0;
+  margin-bottom:8rem;
+  display:grid; grid-template-columns:180px 1fr; gap:60px;</span>
+}
+.proj-header{
+<span class="del">  cursor:pointer; padding:1.75rem 2rem;</span>
+<span class="add">  cursor:default; padding:0;
+  position:sticky; top:80px; align-self:start;
+  flex-direction:column; align-items:flex-start; gap:12px;</span>
+}
+.proj-body{
+<span class="del">  display:none; padding:0 2rem 2rem;
+  border-top:1px solid var(--border);</span>
+<span class="add">  display:block !important; padding:0; border:none;</span>
+}
+.proj-toggle{display:none}
+.proj-index{
+  font-family:'Outfit'; font-size:48px; font-weight:900;
+  color:var(--ink); letter-spacing:-.02em;
+}
+.proj-index::before{content:'('; color:var(--muted); font-size:.6em; vertical-align:top}
+.proj-index::after{content:')'; color:var(--muted); font-size:.6em; vertical-align:top}</pre>
+      </div>
+
+      <!-- Patch 6 -->
+      <div class="patch">
+        <div class="patch-hd"><span>Patch 06 · 统一动效缓动</span><span class="tag">CSS + JS</span></div>
+<pre><span class="c">/* 把所有 .fade-up 的过渡换成 magasinn 同款 */</span>
+.fade-up{
+<span class="del">  opacity:0; transform:translateY(24px);
+  transition:opacity .6s ease, transform .6s ease;</span>
+<span class="add">  opacity:0; transform:translateY(40px);
+  transition:opacity var(--dur) var(--ease),
+             transform var(--dur) var(--ease);</span>
+}
+<span class="c">/* 子元素 stagger */</span>
+.fade-up.visible &gt; *:nth-child(1){transition-delay:0s}
+.fade-up.visible &gt; *:nth-child(2){transition-delay:.1s}
+.fade-up.visible &gt; *:nth-child(3){transition-delay:.2s}
+.fade-up.visible &gt; *:nth-child(4){transition-delay:.3s}
+.fade-up.visible &gt; *:nth-child(5){transition-delay:.4s}
+
+<span class="c">/* Hover 图片缩放 */</span>
+.proj-row img, .cap-card img{
+  transition:transform .6s var(--ease);
+}
+.proj-row:hover img, .cap-card:hover img{
+  transform:scale(1.02);
+}</pre>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════ F · PRIORITY ════════════════════ -->
+  <section id="priority">
+    <div class="marker"><span class="num">F</span>Priority</div>
+    <div>
+      <h2>改造优先级<small>按 ROI 排序，从最小改动就能换最大气质开始。</small></h2>
+
+      <div class="dna">
+        <div class="cell"><div class="k">P0 · 1 小时</div><div class="v">Patch 01（追加 tokens，不改原色）+ Patch 06（缓动统一 1.6s 加 ease-out-expo）。改完整站节奏立刻像换了一个人——但<b>颜色完全没变</b>，依旧是 portfolio 熟悉的米白 + 黄。<b>风险最低</b>。</div></div>
+        <div class="cell"><div class="k">P1 · 半天</div><div class="v">Patch 03（CAPABILITY 去卡片，去白底圆角阴影）+ Patch 04（marquee 过渡带，深底用 <code>#111</code>，✕ 分隔符用 <code>#FFD60A</code> 黄）。这两条让页面"有节奏"，告别"卡片堆"。</div></div>
+        <div class="cell"><div class="k">P2 · 1 天</div><div class="v">Patch 02（hero 编号 + scroll 指示）+ Patch 05（PROJECTS 长卷）。涉及结构调整，需重排已有手风琴里的 4–5 个子组件，需要时间。</div></div>
+        <div class="cell"><div class="k">慎做 · 不动</div><div class="v">① <b>UI 截图不换</b>：你的项目图是流程截图/原型，本身就是内容的一部分，强行换成实拍会失真。② <b>色板不换</b>：暖米白 + 黄是 portfolio 已经形成的视觉记忆，magasinn 的灰红只适合它的题材。</div></div>
+      </div>
+
+      <p style="margin-top:32px;font-size:14px;color:var(--muted);max-width:60ch">一句话总结：<b style="color:var(--ink)">借 magasinn 的"杂志骨架"，留住 portfolio 的"暖色温度"。</b>结构上换皮（去卡片、加 marquee、长卷化、统一缓动），但颜色、内容、信息密度全部不动。改完之后是一份"既有腔调、又有论据、还保留你原本辨识度"的设计师作品集。</p>
+    </div>
+  </section>
+
+  <div class="summary">
+    <div class="marker">END</div>
+    <div>
+      <ol>
+        <li><b>色板（不动）</b>：继续 portfolio 暖米白 <code>#FAFAF8</code> + 暖黄 <code>#FFD60A</code>。不引入 magasinn 的灰红。</li>
+        <li><b>字体（借）</b>：Outfit 900 保留作大标题；正文换成 Inter 或 PingFang，行高拉到 1.8。</li>
+        <li><b>结构（借）</b>：sticky 左侧编号 + 右侧长卷，告别 <code>+/×</code> 手风琴。</li>
+        <li><b>过渡（借）</b>：每两个 section 之间插一条 marquee 文字带（深底 <code>#111</code> + 黄色 ✕ 分隔符）。</li>
+        <li><b>动效（借）</b>：1.6s + <code>cubic-bezier(0.16,1,0.3,1)</code> 是 magasinn 的灵魂参数，全站统一。</li>
+        <li><b>克制（共识）</b>：去掉 hover 阴影、不加 3D、不加 spring；UI 截图原样保留，不换实拍。</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
