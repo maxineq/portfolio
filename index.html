@@ -535,7 +535,7 @@
     .skill-carousel-track::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
     .skill-carousel-slide {
       flex-shrink: 0;
-      width: 320px;
+      width: 280px;
       scroll-snap-align: start;
       border-radius: var(--radius-md);
       overflow: hidden;
@@ -580,7 +580,7 @@
     /* placeholder slide */
     .skill-carousel-slide.placeholder {
       display: flex; align-items: center; justify-content: center;
-      aspect-ratio: 4/3; min-height: 240px;
+      aspect-ratio: 4/3; min-height: 180px;
       background: repeating-linear-gradient(135deg, #F3EFE8, #F3EFE8 10px, #F0EBE2 10px, #F0EBE2 20px);
     }
     .skill-carousel-slide.placeholder .placeholder-text {
@@ -3322,28 +3322,27 @@
           <span class="proj-index">04</span>
           <div class="proj-info">
             <div class="proj-name">B 端设计规范 Skill 化</div>
-            <div class="proj-hook">把设计师脑子里的隐性判断，变成 AI 能执行的显式规范</div>
+            <div class="proj-hook">把隐性判断变成 AI 能执行的显式规范</div>
           </div>
           <div class="proj-tags">
             <span class="ptag filled">AI Skill 封装</span>
             <span class="ptag filled">设计规范工程化</span>
-            <span class="ptag filled">B 端组件体系</span>
           </div>
         </div>
         <div class="proj-body">
           <p class="story" style="margin-top:1.5rem;">
-            做了两年公益机构平台 B 端设计后，我发现一个反复出现的瓶颈：每次把设计稿交给开发，<strong>沟通成本最高的不是样式，而是「为什么这么做」的判断逻辑</strong>——间距为什么是 12px 不是 16px、表单为什么单列不是双列、审核流为什么先填金额再传材料。这些判断在我脑子里是瞬间的，但对 AI 和新人来说是黑盒。
+            做 B 端设计两年，每次交接最高成本的不是样式，而是<strong>「为什么这么做」的判断逻辑</strong>——间距、层级、流程顺序，这些在我脑子里是瞬间的，对 AI 和新人却是黑盒。
           </p>
 
           <div class="tension">
             <div class="tension-side">
               <div class="tension-tag">直觉</div>
-              <div class="tension-body">设计规范文档写好放 Wiki，大家自己看就行</div>
+              <div class="tension-body">规范文档写好放 Wiki，大家自己看</div>
             </div>
             <div class="tension-arrow">→</div>
             <div class="tension-side right">
               <div class="tension-tag">现实是</div>
-              <div class="tension-body">规范文档没人看、看了记不住、记住了遇到新场景又不会用。AI 生成原型时更是完全无视规范——它不知道哪些判断是<strong>约束</strong>，哪些是<strong>偏好</strong></div>
+              <div class="tension-body">文档没人看、看了记不住。AI 生成原型时更完全无视——它分不清哪些是<strong>约束</strong>，哪些是<strong>偏好</strong></div>
             </div>
           </div>
 
@@ -3352,43 +3351,38 @@
             <div class="verdict-text">规范不是给人看的文档，是给 <em>AI</em> 执行的指令。</div>
           </div>
 
-          <p class="story">
-            于是我把两年积累的设计规范——<strong>视觉、交互、流程、组件四个层面，共 2700+ 行</strong>——重构成 AI 可读取的 Skill 指令。核心工作不是「写规范」，而是<strong>把隐性判断拆成显式决策树</strong>：
-          </p>
-
-          <div class="revisions">
+          <div class="revisions" style="margin:2rem 0;">
             <div class="revisions-title">Skill 化的三层拆解</div>
             <div class="revision">
               <div class="revision-round">1</div>
               <div>
                 <div class="revision-fixed">把「设计感觉」翻译成「判断条件」</div>
-                <div class="revision-trigger" style="margin-top:.25rem;">「这里留松一点」→ 间距 ≥ 24px 时视觉呼吸感成立；「这个层级要突出」→ 字号差 ≥ 4px + 字重跨 2 级。每个模糊感受对应一条可执行规则</div>
+                <div class="revision-trigger" style="margin-top:.25rem;">「留松一点」→ 间距 ≥ 24px；「要突出」→ 字号差 ≥ 4px + 字重跨 2 级</div>
               </div>
             </div>
             <div class="revision">
               <div class="revision-round">2</div>
               <div>
                 <div class="revision-fixed">把「页面模板」拆成「组件原子 + 组装规则」</div>
-                <div class="revision-trigger" style="margin-top:.25rem;">不写「列表页长这样」，而是定义 9 种基础组件 + 4 种布局容器 + 组装约束（如：表格列数 > 5 时必须收起次要列）。AI 拿到的是乐高积木，不是成品照片</div>
+                <div class="revision-trigger" style="margin-top:.25rem;">9 种基础组件 + 4 种布局容器 + 组装约束，AI 拿到的是乐高积木</div>
               </div>
             </div>
             <div class="revision">
               <div class="revision-round">3</div>
               <div>
                 <div class="revision-fixed">把「走查清单」变成「生成约束」</div>
-                <div class="revision-trigger" style="margin-top:.25rem;">以前是设计稿做完再检查 20 条规范；现在是规范前置成 Skill 指令，AI 生成时就内嵌约束——零终端操作、5 步出原型</div>
+                <div class="revision-trigger" style="margin-top:.25rem;">规范前置成指令，生成时内嵌约束——零终端、5 步出原型</div>
               </div>
             </div>
           </div>
 
           <!-- Skill 生成案例横滑图集 -->
-          <div class="skill-carousel" id="skill-carousel-04">
+          <div class="skill-carousel" id="skill-carousel-04" style="margin:2rem 0;">
             <div class="skill-carousel-header">
               <div class="skill-carousel-title">Skill 生成的 B 端界面案例</div>
-              <div class="skill-carousel-hint">← 横向滑动查看 →</div>
+              <div class="skill-carousel-hint">← 滑动查看 →</div>
             </div>
             <div class="skill-carousel-track" id="skill-carousel-track">
-              <!-- 占位卡片：等用户提供配图后替换 -->
               <div class="skill-carousel-slide placeholder">
                 <div class="placeholder-text">配图待提供<br>首页原型</div>
               </div>
@@ -3422,23 +3416,19 @@
             </div>
             <div>
               <div class="rn-num" style="font-size:1rem;line-height:1.4;font-weight:800;">18 版迭代</div>
-              <div class="rn-label">从 v1.0 到 v1.9.1<br>持续验证 + 修正</div>
-            </div>
-            <div>
-              <div class="rn-num" style="font-size:1rem;line-height:1.4;font-weight:800;">9 个验证案例</div>
-              <div class="rn-label">首页 / 拨付 / 受助人<br>审核 / 登录等</div>
+              <div class="rn-label">v1.0 → v1.9.1<br>9 个验证案例</div>
             </div>
           </div>
-          <div class="inline-stat" style="margin-top:2rem;">
+          <div class="inline-stat" style="margin-top:1.5rem;">
             <span class="inline-stat-num">5 步 · 零终端</span>
             <span class="inline-stat-label">从需求到可交互原型</span>
           </div>
           <div class="cap-badges">
             <span class="cbadge active">设计规范工程化</span>
             <span class="cbadge active">AI 指令封装</span>
-            <span class="cbadge">B 端组件体系</span>
           </div>
         </div>
+      </div>
       </div>
   </div>
 </section>
@@ -4152,7 +4142,7 @@
     if (!track) return;
     var btnPrev = document.getElementById('skill-carousel-prev');
     var btnNext = document.getElementById('skill-carousel-next');
-    var slideW = 320 + 16; // width + gap
+    var slideW = 280 + 16; // width + gap
 
     function updateNav() {
       if (!btnPrev || !btnNext) return;
