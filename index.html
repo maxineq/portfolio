@@ -505,8 +505,14 @@
     .cbadge.active:last-child::after { content: ''; }
 
     /* ── Project 4: Skill Case Carousel ── */
+    .skill-carousel-container {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #FBF8F2;
+    }
     .skill-carousel {
-      margin: 3rem 0;
       position: relative;
     }
     .skill-carousel-header {
@@ -3351,7 +3357,28 @@
             <div class="verdict-text">规范不是给人看的文档，是给 <em>AI</em> 执行的指令。</div>
           </div>
 
-          <div class="revisions" style="margin:2rem 0;">
+          <div class="detail-label">做了什么</div>
+          <div class="result-nums">
+            <div>
+              <div class="rn-num" style="font-size:1rem;line-height:1.4;font-weight:800;">2700+ 行规范</div>
+              <div class="rn-label">视觉 / 交互 / 流程 / 组件<br>四层 Skill 指令体系</div>
+            </div>
+            <div>
+              <div class="rn-num" style="font-size:1rem;line-height:1.4;font-weight:800;">18 版迭代</div>
+              <div class="rn-label">v1.0 → v1.9.1<br>9 个验证案例</div>
+            </div>
+          </div>
+          <div class="inline-stat" style="margin-top:1.5rem;">
+            <span class="inline-stat-num">5 步 · 零终端</span>
+            <span class="inline-stat-label">从需求到可交互原型</span>
+          </div>
+          <div class="cap-badges">
+            <span class="cbadge active">设计规范工程化</span>
+            <span class="cbadge active">AI 指令封装</span>
+          </div>
+
+          <!-- Skill 化的三层拆解 -->
+          <div class="revisions">
             <div class="revisions-title">Skill 化的三层拆解</div>
             <div class="revision">
               <div class="revision-round">1</div>
@@ -3376,60 +3403,43 @@
             </div>
           </div>
 
-          <!-- Skill 生成案例横滑图集 -->
-          <div class="skill-carousel" id="skill-carousel-04" style="margin:2rem 0;">
-            <div class="skill-carousel-header">
-              <div class="skill-carousel-title">Skill 生成的 B 端界面案例</div>
-              <div class="skill-carousel-hint">← 滑动查看 →</div>
-            </div>
-            <div class="skill-carousel-track" id="skill-carousel-track">
-              <div class="skill-carousel-slide placeholder">
-                <div class="placeholder-text">配图待提供<br>首页原型</div>
+          <!-- Skill 生成案例横滑图集 · 独立容器 -->
+          <div class="skill-carousel-container">
+            <div class="skill-carousel" id="skill-carousel-04">
+              <div class="skill-carousel-header">
+                <div class="skill-carousel-title">Skill 生成的 B 端界面案例</div>
+                <div class="skill-carousel-hint">← 滑动查看 →</div>
               </div>
-              <div class="skill-carousel-slide placeholder">
-                <div class="placeholder-text">配图待提供<br>拨付流程页</div>
+              <div class="skill-carousel-track" id="skill-carousel-track">
+                <div class="skill-carousel-slide placeholder">
+                  <div class="placeholder-text">配图待提供<br>首页原型</div>
+                </div>
+                <div class="skill-carousel-slide placeholder">
+                  <div class="placeholder-text">配图待提供<br>拨付流程页</div>
+                </div>
+                <div class="skill-carousel-slide placeholder">
+                  <div class="placeholder-text">配图待提供<br>受助人管理页</div>
+                </div>
+                <div class="skill-carousel-slide placeholder">
+                  <div class="placeholder-text">配图待提供<br>审核流页面</div>
+                </div>
+                <div class="skill-carousel-slide placeholder">
+                  <div class="placeholder-text">配图待提供<br>登录注册页</div>
+                </div>
+                <div class="skill-carousel-slide placeholder">
+                  <div class="placeholder-text">配图待提供<br>更多案例</div>
+                </div>
               </div>
-              <div class="skill-carousel-slide placeholder">
-                <div class="placeholder-text">配图待提供<br>受助人管理页</div>
+              <div class="skill-carousel-nav">
+                <button class="skill-carousel-nav-btn" id="skill-carousel-prev" aria-label="上一张">‹</button>
+                <button class="skill-carousel-nav-btn" id="skill-carousel-next" aria-label="下一张">›</button>
               </div>
-              <div class="skill-carousel-slide placeholder">
-                <div class="placeholder-text">配图待提供<br>审核流页面</div>
-              </div>
-              <div class="skill-carousel-slide placeholder">
-                <div class="placeholder-text">配图待提供<br>登录注册页</div>
-              </div>
-              <div class="skill-carousel-slide placeholder">
-                <div class="placeholder-text">配图待提供<br>更多案例</div>
-              </div>
-            </div>
-            <div class="skill-carousel-nav">
-              <button class="skill-carousel-nav-btn" id="skill-carousel-prev" aria-label="上一张">‹</button>
-              <button class="skill-carousel-nav-btn" id="skill-carousel-next" aria-label="下一张">›</button>
             </div>
           </div>
 
-          <div class="detail-label">做了什么</div>
-          <div class="result-nums">
-            <div>
-              <div class="rn-num" style="font-size:1rem;line-height:1.4;font-weight:800;">2700+ 行规范</div>
-              <div class="rn-label">视觉 / 交互 / 流程 / 组件<br>四层 Skill 指令体系</div>
-            </div>
-            <div>
-              <div class="rn-num" style="font-size:1rem;line-height:1.4;font-weight:800;">18 版迭代</div>
-              <div class="rn-label">v1.0 → v1.9.1<br>9 个验证案例</div>
-            </div>
-          </div>
-          <div class="inline-stat" style="margin-top:1.5rem;">
-            <span class="inline-stat-num">5 步 · 零终端</span>
-            <span class="inline-stat-label">从需求到可交互原型</span>
-          </div>
-          <div class="cap-badges">
-            <span class="cbadge active">设计规范工程化</span>
-            <span class="cbadge active">AI 指令封装</span>
-          </div>
         </div>
       </div>
-      </div>
+
   </div>
 </section>
 
