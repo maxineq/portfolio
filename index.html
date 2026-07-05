@@ -508,10 +508,10 @@
     /* ── Project 4: Skill Case Carousel ── */
     .skill-carousel-container {
       margin-top: 3rem;
-      padding: 1.5rem;
+      padding: 1.25rem 1.25rem 1.5rem;
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      background: #FBF8F2;
+      border-radius: var(--radius-lg);
+      background: var(--bg);
       min-width: 0;
       max-width: 100%;
       overflow: hidden;
@@ -533,9 +533,15 @@
     .skill-carousel-hint {
       font-size: .7rem; color: var(--muted); opacity: .7;
     }
+    /* 图片轨道自身的独立容器：横滑仅发生在这里 */
+    .skill-carousel-viewport {
+      position: relative;
+      min-width: 0;
+      max-width: 100%;
+    }
     .skill-carousel-track {
       display: flex;
-      gap: 1rem;
+      gap: .9rem;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
@@ -552,10 +558,10 @@
       flex-shrink: 0;
       width: 280px;
       scroll-snap-align: start;
-      border-radius: var(--radius-md);
+      border-radius: 6px;
       overflow: hidden;
       border: 1px solid var(--border);
-      background: #FEFCF9;
+      background: var(--bg-white);
       cursor: pointer;
       transition: transform .25s var(--ease), box-shadow .25s var(--ease);
     }
@@ -565,10 +571,11 @@
     }
     .skill-carousel-slide img {
       width: 100%; display: block; aspect-ratio: 4/3; object-fit: cover;
-      background: #F3EFE8;
+      background: var(--bg);
+      border-radius: var(--radius-lg);
     }
     .skill-carousel-caption {
-      padding: .75rem .9rem .85rem;
+      padding: .7rem .85rem .8rem;
     }
     .skill-carousel-caption-title {
       font-size: .82rem; font-weight: 700; color: var(--text);
@@ -577,26 +584,42 @@
     .skill-carousel-caption-sub {
       font-size: .7rem; color: var(--muted); line-height: 1.5;
     }
-    .skill-carousel-nav {
-      display: flex; gap: .5rem; margin-top: .75rem;
+    .skill-carousel-caption-sep {
+      border-top: 1px solid var(--border);
+      margin: .5rem 0;
     }
+    /* 左右切换：叠加在图片轨道两侧，贴合站内一致的细线 icon 风格 */
     .skill-carousel-nav-btn {
-      width: 36px; height: 36px;
-      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px; height: 32px;
+      border-radius: var(--radius-md);
       border: 1px solid var(--border);
-      background: var(--c-white);
+      background: var(--bg-white);
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      font-size: .9rem; color: var(--text);
-      transition: background .2s, border-color .2s;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity .2s, background .2s, border-color .2s;
     }
     .skill-carousel-nav-btn:hover { background: var(--text); color: var(--c-white); border-color: var(--text); }
-    .skill-carousel-nav-btn:disabled { opacity: .3; cursor: default; }
+    .skill-carousel-nav-btn:disabled { opacity: 0 !important; pointer-events: none; }
+    .skill-carousel:hover .skill-carousel-nav-btn:not(:disabled) { opacity: 1; }
+    .skill-carousel-nav-btn svg {
+      width: 14px; height: 14px;
+    }
+    .skill-carousel-nav-prev { left: -8px; }
+    .skill-carousel-nav-next { right: -8px; }
+    @media (max-width: 900px) {
+      .skill-carousel-nav-btn { opacity: 1; }
+    }
     /* placeholder slide */
     .skill-carousel-slide.placeholder {
       display: flex; align-items: center; justify-content: center;
       aspect-ratio: 4/3; min-height: 180px;
-      background: repeating-linear-gradient(135deg, #F3EFE8, #F3EFE8 10px, #F0EBE2 10px, #F0EBE2 20px);
+      background: var(--bg);
+      border-radius: var(--radius-lg);
     }
     .skill-carousel-slide.placeholder .placeholder-text {
       font-size: .72rem; color: var(--muted); text-align: center; padding: 1rem; line-height: 1.6;
@@ -605,7 +628,7 @@
       .skill-carousel-slide { width: 260px; }
     }
 
-    /* ── Iframe proto ── */
+        /* ── Iframe proto ── */
     .proto-wrap {
       margin-top: 1.5rem;
       border-radius: var(--radius-md);
@@ -3419,29 +3442,33 @@
                 <div class="skill-carousel-title">Skill 生成的 B 端界面案例</div>
                 <div class="skill-carousel-hint">← 滑动查看 →</div>
               </div>
-              <div class="skill-carousel-track" id="skill-carousel-track">
-                <div class="skill-carousel-slide placeholder">
-                  <div class="placeholder-text">配图待提供<br>首页原型</div>
+              <div class="skill-carousel-viewport">
+                <div class="skill-carousel-track" id="skill-carousel-track">
+                  <div class="skill-carousel-slide placeholder">
+                    <div class="placeholder-text">配图待提供<br>首页原型</div>
+                  </div>
+                  <div class="skill-carousel-slide placeholder">
+                    <div class="placeholder-text">配图待提供<br>拨付流程页</div>
+                  </div>
+                  <div class="skill-carousel-slide placeholder">
+                    <div class="placeholder-text">配图待提供<br>受助人管理页</div>
+                  </div>
+                  <div class="skill-carousel-slide placeholder">
+                    <div class="placeholder-text">配图待提供<br>审核流页面</div>
+                  </div>
+                  <div class="skill-carousel-slide placeholder">
+                    <div class="placeholder-text">配图待提供<br>登录注册页</div>
+                  </div>
+                  <div class="skill-carousel-slide placeholder">
+                    <div class="placeholder-text">配图待提供<br>更多案例</div>
+                  </div>
                 </div>
-                <div class="skill-carousel-slide placeholder">
-                  <div class="placeholder-text">配图待提供<br>拨付流程页</div>
-                </div>
-                <div class="skill-carousel-slide placeholder">
-                  <div class="placeholder-text">配图待提供<br>受助人管理页</div>
-                </div>
-                <div class="skill-carousel-slide placeholder">
-                  <div class="placeholder-text">配图待提供<br>审核流页面</div>
-                </div>
-                <div class="skill-carousel-slide placeholder">
-                  <div class="placeholder-text">配图待提供<br>登录注册页</div>
-                </div>
-                <div class="skill-carousel-slide placeholder">
-                  <div class="placeholder-text">配图待提供<br>更多案例</div>
-                </div>
-              </div>
-              <div class="skill-carousel-nav">
-                <button class="skill-carousel-nav-btn" id="skill-carousel-prev" aria-label="上一张">‹</button>
-                <button class="skill-carousel-nav-btn" id="skill-carousel-next" aria-label="下一张">›</button>
+                <button class="skill-carousel-nav-btn skill-carousel-nav-prev" id="skill-carousel-prev" aria-label="上一张">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="skill-carousel-nav-btn skill-carousel-nav-next" id="skill-carousel-next" aria-label="下一张">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
               </div>
             </div>
           </div>
@@ -4161,7 +4188,7 @@
     if (!track) return;
     var btnPrev = document.getElementById('skill-carousel-prev');
     var btnNext = document.getElementById('skill-carousel-next');
-    var slideW = 280 + 16; // width + gap
+    var slideW = 280 + 14; // width + gap (.9rem ≈ 14.4px)
 
     function updateNav() {
       if (!btnPrev || !btnNext) return;
