@@ -527,6 +527,27 @@
       text-transform: uppercase; color: var(--muted);
     }
     .ic-carousel-hint { font-size: .7rem; color: var(--muted); opacity: .7; }
+    /* tab 切换 */
+    .ic-tabs {
+      display: flex; gap: .25rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .ic-tab {
+      appearance: none; border: none; background: none; cursor: pointer;
+      font-family: 'Outfit', 'PingFang SC', -apple-system, sans-serif;
+      font-size: .82rem; font-weight: 600; color: var(--muted);
+      padding: .55rem .9rem; position: relative;
+      transition: color .2s;
+    }
+    .ic-tab:hover { color: var(--text); }
+    .ic-tab.active { color: var(--text); font-weight: 700; }
+    .ic-tab.active::after {
+      content: ''; position: absolute; left: .9rem; right: .9rem; bottom: -1px;
+      height: 2px; background: var(--text); border-radius: 2px;
+    }
+    .ic-panel { display: none; }
+    .ic-panel.active { display: block; }
     .ic-carousel-viewport { position: relative; min-width: 0; max-width: 100%; }
     .ic-carousel-track {
       display: flex; gap: 1rem;
@@ -569,6 +590,9 @@
       overflow: hidden;
     }
     .ic-icon-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .ic-icon-wrap.ic-ph { background: var(--bg); }
+    .ic-ph-text { font-size: .72rem; color: var(--muted); text-align: center; line-height: 1.7; padding: 1rem; }
+    .ic-ph-text span { font-size: .6rem; opacity: .75; }
     .ic-icon-meta { padding: .85rem .95rem 1rem; }
     .ic-icon-no {
       font-family: 'Outfit', 'PingFang SC', -apple-system, sans-serif;
@@ -3461,9 +3485,15 @@
           <div class="ic-carousel-container">
             <div class="ic-carousel" id="ic-carousel-04">
               <div class="ic-carousel-header">
-                <div class="ic-carousel-title">Iconography · 图标资产 → Web 端落地</div>
+                <div class="ic-carousel-title">设计资产 → Web 端落地</div>
                 <div class="ic-carousel-hint">← 滑动查看 →</div>
               </div>
+              <div class="ic-tabs" role="tablist">
+                <button class="ic-tab active" data-tab="icon" role="tab">图标</button>
+                <button class="ic-tab" data-tab="comp" role="tab">组件</button>
+                <button class="ic-tab" data-tab="page" role="tab">界面</button>
+              </div>
+              <div class="ic-panel active" data-panel="icon">
               <div class="ic-carousel-viewport">
                 <div class="ic-carousel-track" id="ic-carousel-track">
                   <div class="ic-slide">
@@ -3681,6 +3711,231 @@
                 <button class="ic-carousel-nav-btn ic-carousel-nav-next" id="ic-carousel-next" aria-label="下一张">
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
+              </div>
+              </div>
+              <div class="ic-panel" data-panel="comp">
+              <div class="ic-carousel-viewport">
+                <div class="ic-carousel-track" id="ic-carousel-track-comp">
+                  <div class="ic-slide">
+                    <div class="ic-slide-left">
+                      <div class="ic-icon-wrap ic-ph">
+                        <div class="ic-ph-text">按钮 / 表单组件<br><span>Button · Input · Select</span></div>
+                      </div>
+                      <div class="ic-icon-meta">
+                        <div class="ic-icon-no">待补</div>
+                        <div class="ic-icon-style">按钮 / 表单组件</div>
+                        <div class="ic-icon-en">Placeholder</div>
+                        <div class="ic-icon-theme">Button · Input · Select</div>
+                      </div>
+                    </div>
+                    <div class="ic-slide-right">
+                      <div class="ic-web-label">1440 × 900 · Web 端应用</div>
+                      <div class="ic-web-mock">
+                        <div class="ic-web-topbar">
+                          <span class="ic-web-dot"></span><span class="ic-web-dot"></span><span class="ic-web-dot"></span>
+                          <span class="ic-web-url">charity.tencent.com</span>
+                        </div>
+                        <div class="ic-web-body">
+                          <div class="ic-web-placeholder">配图待提供<br><span>组件落地在真实 Web 页面</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ic-slide">
+                    <div class="ic-slide-left">
+                      <div class="ic-icon-wrap ic-ph">
+                        <div class="ic-ph-text">表格 / 列表组件<br><span>Table · List · Pagination</span></div>
+                      </div>
+                      <div class="ic-icon-meta">
+                        <div class="ic-icon-no">待补</div>
+                        <div class="ic-icon-style">表格 / 列表组件</div>
+                        <div class="ic-icon-en">Placeholder</div>
+                        <div class="ic-icon-theme">Table · List · Pagination</div>
+                      </div>
+                    </div>
+                    <div class="ic-slide-right">
+                      <div class="ic-web-label">1440 × 900 · Web 端应用</div>
+                      <div class="ic-web-mock">
+                        <div class="ic-web-topbar">
+                          <span class="ic-web-dot"></span><span class="ic-web-dot"></span><span class="ic-web-dot"></span>
+                          <span class="ic-web-url">charity.tencent.com</span>
+                        </div>
+                        <div class="ic-web-body">
+                          <div class="ic-web-placeholder">配图待提供<br><span>组件落地在真实 Web 页面</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ic-slide">
+                    <div class="ic-slide-left">
+                      <div class="ic-icon-wrap ic-ph">
+                        <div class="ic-ph-text">卡片 / 弹窗组件<br><span>Card · Modal · Drawer</span></div>
+                      </div>
+                      <div class="ic-icon-meta">
+                        <div class="ic-icon-no">待补</div>
+                        <div class="ic-icon-style">卡片 / 弹窗组件</div>
+                        <div class="ic-icon-en">Placeholder</div>
+                        <div class="ic-icon-theme">Card · Modal · Drawer</div>
+                      </div>
+                    </div>
+                    <div class="ic-slide-right">
+                      <div class="ic-web-label">1440 × 900 · Web 端应用</div>
+                      <div class="ic-web-mock">
+                        <div class="ic-web-topbar">
+                          <span class="ic-web-dot"></span><span class="ic-web-dot"></span><span class="ic-web-dot"></span>
+                          <span class="ic-web-url">charity.tencent.com</span>
+                        </div>
+                        <div class="ic-web-body">
+                          <div class="ic-web-placeholder">配图待提供<br><span>组件落地在真实 Web 页面</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ic-slide">
+                    <div class="ic-slide-left">
+                      <div class="ic-icon-wrap ic-ph">
+                        <div class="ic-ph-text">导航 / 菜单组件<br><span>Nav · Menu · Tabs</span></div>
+                      </div>
+                      <div class="ic-icon-meta">
+                        <div class="ic-icon-no">待补</div>
+                        <div class="ic-icon-style">导航 / 菜单组件</div>
+                        <div class="ic-icon-en">Placeholder</div>
+                        <div class="ic-icon-theme">Nav · Menu · Tabs</div>
+                      </div>
+                    </div>
+                    <div class="ic-slide-right">
+                      <div class="ic-web-label">1440 × 900 · Web 端应用</div>
+                      <div class="ic-web-mock">
+                        <div class="ic-web-topbar">
+                          <span class="ic-web-dot"></span><span class="ic-web-dot"></span><span class="ic-web-dot"></span>
+                          <span class="ic-web-url">charity.tencent.com</span>
+                        </div>
+                        <div class="ic-web-body">
+                          <div class="ic-web-placeholder">配图待提供<br><span>组件落地在真实 Web 页面</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="ic-carousel-nav-btn ic-carousel-nav-prev" id="ic-carousel-prev-comp" aria-label="上一张">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="ic-carousel-nav-btn ic-carousel-nav-next" id="ic-carousel-next-comp" aria-label="下一张">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+              </div>
+              <div class="ic-panel" data-panel="page">
+              <div class="ic-carousel-viewport">
+                <div class="ic-carousel-track" id="ic-carousel-track-page">
+                  <div class="ic-slide">
+                    <div class="ic-slide-left">
+                      <div class="ic-icon-wrap ic-ph">
+                        <div class="ic-ph-text">首页 · Dashboard<br><span>数据概览 / 快捷入口</span></div>
+                      </div>
+                      <div class="ic-icon-meta">
+                        <div class="ic-icon-no">待补</div>
+                        <div class="ic-icon-style">首页 · Dashboard</div>
+                        <div class="ic-icon-en">Placeholder</div>
+                        <div class="ic-icon-theme">数据概览 / 快捷入口</div>
+                      </div>
+                    </div>
+                    <div class="ic-slide-right">
+                      <div class="ic-web-label">1440 × 900 · Web 端应用</div>
+                      <div class="ic-web-mock">
+                        <div class="ic-web-topbar">
+                          <span class="ic-web-dot"></span><span class="ic-web-dot"></span><span class="ic-web-dot"></span>
+                          <span class="ic-web-url">charity.tencent.com</span>
+                        </div>
+                        <div class="ic-web-body">
+                          <div class="ic-web-placeholder">配图待提供<br><span>整页界面预览</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ic-slide">
+                    <div class="ic-slide-left">
+                      <div class="ic-icon-wrap ic-ph">
+                        <div class="ic-ph-text">拨付流程页<br><span>多步表单 / 状态流转</span></div>
+                      </div>
+                      <div class="ic-icon-meta">
+                        <div class="ic-icon-no">待补</div>
+                        <div class="ic-icon-style">拨付流程页</div>
+                        <div class="ic-icon-en">Placeholder</div>
+                        <div class="ic-icon-theme">多步表单 / 状态流转</div>
+                      </div>
+                    </div>
+                    <div class="ic-slide-right">
+                      <div class="ic-web-label">1440 × 900 · Web 端应用</div>
+                      <div class="ic-web-mock">
+                        <div class="ic-web-topbar">
+                          <span class="ic-web-dot"></span><span class="ic-web-dot"></span><span class="ic-web-dot"></span>
+                          <span class="ic-web-url">charity.tencent.com</span>
+                        </div>
+                        <div class="ic-web-body">
+                          <div class="ic-web-placeholder">配图待提供<br><span>整页界面预览</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ic-slide">
+                    <div class="ic-slide-left">
+                      <div class="ic-icon-wrap ic-ph">
+                        <div class="ic-ph-text">受助人管理页<br><span>列表 / 筛选 / 详情</span></div>
+                      </div>
+                      <div class="ic-icon-meta">
+                        <div class="ic-icon-no">待补</div>
+                        <div class="ic-icon-style">受助人管理页</div>
+                        <div class="ic-icon-en">Placeholder</div>
+                        <div class="ic-icon-theme">列表 / 筛选 / 详情</div>
+                      </div>
+                    </div>
+                    <div class="ic-slide-right">
+                      <div class="ic-web-label">1440 × 900 · Web 端应用</div>
+                      <div class="ic-web-mock">
+                        <div class="ic-web-topbar">
+                          <span class="ic-web-dot"></span><span class="ic-web-dot"></span><span class="ic-web-dot"></span>
+                          <span class="ic-web-url">charity.tencent.com</span>
+                        </div>
+                        <div class="ic-web-body">
+                          <div class="ic-web-placeholder">配图待提供<br><span>整页界面预览</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ic-slide">
+                    <div class="ic-slide-left">
+                      <div class="ic-icon-wrap ic-ph">
+                        <div class="ic-ph-text">审核流页面<br><span>任务流 / 审批链路</span></div>
+                      </div>
+                      <div class="ic-icon-meta">
+                        <div class="ic-icon-no">待补</div>
+                        <div class="ic-icon-style">审核流页面</div>
+                        <div class="ic-icon-en">Placeholder</div>
+                        <div class="ic-icon-theme">任务流 / 审批链路</div>
+                      </div>
+                    </div>
+                    <div class="ic-slide-right">
+                      <div class="ic-web-label">1440 × 900 · Web 端应用</div>
+                      <div class="ic-web-mock">
+                        <div class="ic-web-topbar">
+                          <span class="ic-web-dot"></span><span class="ic-web-dot"></span><span class="ic-web-dot"></span>
+                          <span class="ic-web-url">charity.tencent.com</span>
+                        </div>
+                        <div class="ic-web-body">
+                          <div class="ic-web-placeholder">配图待提供<br><span>整页界面预览</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="ic-carousel-nav-btn ic-carousel-nav-prev" id="ic-carousel-prev-page" aria-label="上一张">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="ic-carousel-nav-btn ic-carousel-nav-next" id="ic-carousel-next-page" aria-label="下一张">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
               </div>
             </div>
           </div>
@@ -4394,31 +4649,56 @@
     });
   })();
 
-  // ══ Project 4: Iconography Carousel ══
+  // ══ Project 4: Icon/Comp/Page Carousels + Tabs ══
   (function() {
-    var track = document.getElementById('ic-carousel-track');
-    if (!track) return;
-    var btnPrev = document.getElementById('ic-carousel-prev');
-    var btnNext = document.getElementById('ic-carousel-next');
-    var slideW = 680 + 16; // slide width + gap (1rem = 16px)
+    var carousel = document.getElementById('ic-carousel-04');
+    if (!carousel) return;
+    var slideW = 680 + 16; // slide width + gap
 
-    function updateNav() {
-      if (!btnPrev || !btnNext) return;
-      var maxScroll = track.scrollWidth - track.clientWidth;
-      btnPrev.disabled = track.scrollLeft <= 0;
-      btnNext.disabled = track.scrollLeft >= maxScroll - 1;
+    // 每个 track 绑定切换按钮
+    function bindTrack(trackId, prevId, nextId) {
+      var track = document.getElementById(trackId);
+      if (!track) return null;
+      var btnPrev = document.getElementById(prevId);
+      var btnNext = document.getElementById(nextId);
+      function updateNav() {
+        if (!btnPrev || !btnNext) return;
+        var maxScroll = track.scrollWidth - track.clientWidth;
+        btnPrev.disabled = track.scrollLeft <= 0;
+        btnNext.disabled = track.scrollLeft >= maxScroll - 1;
+      }
+      if (btnPrev) btnPrev.addEventListener('click', function() {
+        track.scrollBy({ left: -slideW, behavior: 'smooth' });
+      });
+      if (btnNext) btnNext.addEventListener('click', function() {
+        track.scrollBy({ left: slideW, behavior: 'smooth' });
+      });
+      track.addEventListener('scroll', updateNav, { passive: true });
+      return updateNav;
     }
 
-    if (btnPrev) btnPrev.addEventListener('click', function() {
-      track.scrollBy({ left: -slideW, behavior: 'smooth' });
-    });
-    if (btnNext) btnNext.addEventListener('click', function() {
-      track.scrollBy({ left: slideW, behavior: 'smooth' });
+    var updaters = [
+      bindTrack('ic-carousel-track', 'ic-carousel-prev', 'ic-carousel-next'),
+      bindTrack('ic-carousel-track-comp', 'ic-carousel-prev-comp', 'ic-carousel-next-comp'),
+      bindTrack('ic-carousel-track-page', 'ic-carousel-prev-page', 'ic-carousel-next-page')
+    ].filter(Boolean);
+
+    function refreshAll() { updaters.forEach(function(fn){ fn(); }); }
+    window.addEventListener('resize', refreshAll, { passive: true });
+
+    // tab 切换
+    var tabs = carousel.querySelectorAll('.ic-tab');
+    var panels = carousel.querySelectorAll('.ic-panel');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var name = tab.getAttribute('data-tab');
+        tabs.forEach(function(t){ t.classList.toggle('active', t === tab); });
+        panels.forEach(function(p){ p.classList.toggle('active', p.getAttribute('data-panel') === name); });
+        refreshAll();
+      });
     });
 
-    track.addEventListener('scroll', updateNav, { passive: true });
-    window.addEventListener('resize', updateNav, { passive: true });
-    updateNav();
+    refreshAll();
   })();
 </script>
 
