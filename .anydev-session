@@ -1,0 +1,8 @@
+{
+  "mode": "cli",
+  "envId": "evnIns-6y2ejivmgcic",
+  "exec_channel": "any-agent",
+  "detected_at": "2026-11-24T08:23:51Z",
+  "anydev_version": "3.2.2",
+  "anydev_binary": "/data/home/maxineqiu/.codebuddy/skills/anydev/bin/any"
+}

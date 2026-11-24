@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-11-24T08:32:11Z",
+  "generated_by": "code-verify.sh",
+  "project_type": "node",
+  "entry_file": "server.js",
+  "runtime": {
+    "package_manager": "npm"
+  },
+  "dependencies": {
+    "source_file": "",
+    "has_deps": false,
+    "db_hint": "none"
+  },
+  "verify_status": "passed"
+}
